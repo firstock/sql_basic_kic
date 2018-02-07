@@ -149,7 +149,8 @@ select job "업무별", deptno "부서별", count(empno) "각 인원수", floor(avg(sal)) 
     group by job, deptno
     order by avg(sal) desc;
 --문제4) EMP 테이블에서 부서 인원이 4명보다 많은 부서의 부서번호, 인원수, 급여의 합을 출력하여라.
-select deptno "부서번호", count(empno), sum(sal)        -- ?? 아마 맞게 했을 걸
+    -- ?? 아마 맞게 했을 걸
+select deptno "부서번호", count(empno), sum(sal)        
     from emp
     group by deptno
     having count(empno) >4;
