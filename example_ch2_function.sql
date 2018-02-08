@@ -120,6 +120,10 @@ select * from emp;
 select ename, mgr, decode(mgr,null,'상위관리자','7869담당')
     from emp;
 
+올 ㅋ 배우기 전 후랑 답 비슷하넹;
+select ename, mgr, decode(mgr, null, '상위관리자', mgr||'담당')
+    from emp;
+
 --[ 실습 ] 
 ------------ 이하는 아직 수업 안 나간부분 '18.1.7.수/ 더 좋은 코드가 있을겨!!
 

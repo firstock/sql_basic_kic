@@ -276,4 +276,212 @@ select * from emp;
 select decode(deptno,10,'총무',   20,'재무',   30,'인사', 'NA')
     from emp;
     
+   
+select * from emp;
+
+-- decode( decode( ... / if의 축약형. 근데 대소비교 안됨 > 할 수 없이 if, case
+select decode ('1234','12',decode('34','56',1,2),3)
+    from dual;
+
+-- if
+if a=b
+    then
+        if c=d
+        then 1
+        else 2
+    else 3;
     
+
+-- case
+select deptno, case  when deptno=10 then '총무부'
+                     when deptno=20 then '재무부'
+                     when deptno=30 then '인사부'
+                     else '기타'
+               end as 부서명
+    from emp;
+    
+    -- 비교대상이 동일& 동등비교 '='
+
+select deptno, case deptno when 10 then '총무부'
+                         when 20 then '재무부'
+                         when 30 then '인사부'
+                         else '기타'
+               end as 부서명
+    from emp;
+    
+    -- professor에서 deptno가 101 정교수 교수대표, 101 정교수x 교수후보 나머지 기타
+select *
+    from professor;
+
+select deptno, case when deptno=101 and position='정교수' then '교수대표'
+                    when deptno=101 and position!='정교수' then '교수후보'
+                    else '기타'
+               end as 교수xx
+    from professor;
+
+    -- ?? 더 줄이려면?
+desc PROFESSOR;
+select deptno, case when deptno=101 and position='정교수' then '교수대표'
+                    when deptno=101 and position!='정교수' then '교수후보'
+                    else '기타'
+               end as 교수xx
+    from professor;
+
+-- ! sql에는 if가 없다!
+ㄴㄴ select deptno
+    , if deptno=101
+      then
+        if position='정교수'
+        then '교수대표'
+        else '교수후보'
+        end if
+      else '기타'
+      end if
+    from professor;
+
+select deptno, position, decode(deptno, 101
+                                      , decode(position,'정교수','교수대표','교수후보')
+                                      ,'기타')
+    from professor;
+    
+--문제3) EMP 테이블의 사원이름, 매니저번호(MGR)를 출력하고, 매니저번호가 null이면 ‘상위관리자’로 표시하고, 매니저번호가 있으면 ‘7869담당‘으로 표시하여라.
+-- 각 행마다 다른 값
+select * from emp;
+select ename, mgr, decode(mgr, null, '상위관리자', mgr||'담당')
+    from emp;
+    
+    , count(commission_pct);
+--  count
+select count(*), count(employee_id)
+    from employees;
+    
+desc EMPLOYEES;
+
+select count(*), count(empno), count(comm), sum(comm)
+    from emp;
+    
+select median(comm), round(variance(comm),7)
+       , round(stddev(comm),7), round(stddev(comm),1), avg(comm), round(sum(comm)/count(empno), 7) "null포함 평균"
+    from emp;
+    
+select avg(comm), round(avg(nvl(comm,0)),7), round(avg(nvl(comm,0)),1), round(sum(comm)/count(empno), 7) "null포함 평균"
+    from emp;
+    
+    
+-- group by
+
+    -- 부서별 평균연봉
+desc emp; -- sal null 가능. 연봉없는 사람은 없네
+select deptno, round(avg(nvl(sal,0))), round(avg(sal))
+    from emp
+    group by deptno;
+    
+nope> select deptno, ename
+    from emp
+    group by deptno;
+    
+desc emp;
+select count(empno) from emp;
+select deptno, job
+    from emp
+    group by deptno, job;
+    
+select * from employees;
+
+    
+select department_id, job_id, count(*), sum(salary) -- 1,2,3,4
+    from employees
+    group by department_id, job_id
+    order by 1; --5는 에러
+    
+select decode(substr(jumin,7,1),1,'남자', 2,'여자','2000이후출생') 성별
+       , round(avg(height)) 평균키
+       , round(avg(weight)) 평균몸무게
+    from student
+    group by substr(jumin,7,1);
+    
+-- having
+
+select *
+    from emp2
+    ;
+    
+select deptno, avg(pay)/10000 평균연봉_만원
+    from emp2
+    group by deptno
+    ;
+    
+select deptno, avg(pay)/10000 평균연봉_만원
+    from emp2
+    group by deptno
+    having avg(pay)/10000 between 3000 and 10000
+    ;
+    
+--문제3) emp 테이블을 이용하여 업무별(JOB), 부서별(DEPTNO)로 그룹화하여 각각의 인원수와 급여평균을 구하고 급여평균이 많은 순으로 정렬하여라.
+desc emp;
+select * from emp;
+select count(empno)인원수, avg(sal)급여평균
+    from emp
+    group by job, deptno
+--    order by 2 desc;
+    order by 급여평균 desc;
+
+
+--문제4) EMP 테이블에서 부서 인원이 4명보다 많은 부서의 부서번호, 인원수, 급여의 합을 출력하여라.
+select deptno 부서번호, count(empno)인원수, sum(sal)급여합
+    from emp
+    group by deptno
+    having 4< count(empno)
+    ;
+    
+-- 집합 연산자
+    -- union: 세로로 합침. 중복 생략. 18행
+    -- 세로니까 같은 의미, 같은 타입으로
+select department_id, salary
+    from employees
+    where salary >10000
+    and DEPARTMENT_id= 90
+union
+    select department_id, salary
+    from employees
+    where salary< 10000
+    and department_id = 80;
+    
+    -- union all. 26행
+select department_id, salary
+    from employees
+    where salary >10000
+    and DEPARTMENT_id= 90
+union all
+    select department_id, salary
+    from employees
+    where salary< 10000
+    and department_id = 80;
+    
+    --
+desc emp;
+    --ENAME		VARCHAR2(10)
+    --DEPTNO		NUMBER(2)
+desc emp2;
+    --NAME	NOT NULL	VARCHAR2(20)
+    --DEPTNO	NOT NULL	VARCHAR2(6)
+desc emp, emp2; -- ????
+
+    -- 타입만= ㅇㅋ. 길이는 달라도 됨
+select empno, ename
+    from emp
+    union all
+    select empno, name
+    from emp2;
+    
+select empno, ename, to_char(deptno)
+    from emp
+    union all
+    select empno, name, deptno
+    from emp2;
+    
+    -- sign
+select sign(1)
+        ,sign(-1)
+        ,sign(0)
+    from dual;
