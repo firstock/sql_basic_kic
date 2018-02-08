@@ -1,5 +1,5 @@
--- ctrl+h > (--drop, drop) > F5 > ctrl+h > (drop, --drop)
-----drop table professor ;
+-- ctrl+h > (--drop, --drop) > F5 > ctrl+h > (--drop, --drop)
+--drop table professor ;
 
 create table professor
 (profno number(4) primary key,
@@ -63,7 +63,7 @@ values (4007,'허은','silver-her','조교수',290,to_date('2001-05-23','YYYY-MM-DD')
 
 commit;
 
-----drop table department cascade constraint;
+--drop table department cascade constraint;
 create table department
 ( deptno number(3) primary key ,
   dname varchar2(25) not null,
@@ -109,7 +109,7 @@ values (20,'인문대학',null,null);
 commit;
  
 
-----drop table student purge;
+--drop table student purge;
 
 create table student
 ( studno number(4) primary key,
@@ -187,7 +187,7 @@ insert into student values (
 
 commit;
 
-----drop table emp2 cascade constraint ;
+--drop table emp2 cascade constraint ;
 
 CREATE TABLE EMP2 (
  EMPNO       NUMBER  PRIMARY KEY,
@@ -224,7 +224,7 @@ INSERT INTO EMP2 VALUES (20000119,'장금강',TO_DATE('19801105','YYYYMMDD'),'1004'
 INSERT INTO EMP2 VALUES (20000210,'나한라',TO_DATE('19801215','YYYYMMDD'),'1005','인턴직','031)345-3456','독서', 20000000,'',19960303);
 COMMIT;
 
-----drop table dept2 cascade constraint;
+--drop table dept2 cascade constraint;
 SELECT * FROM DEPT2;
 CREATE TABLE DEPT2 (
  DCODE   VARCHAR2(06)  PRIMARY KEY,
@@ -249,7 +249,7 @@ INSERT INTO DEPT2 VALUES ('1011','영업4팀','1007','울산지사');
 
 commit;
 
-----drop table cal purge ;
+--drop table cal purge ;
 
 CREATE TABLE cal
    (week  varchar2(1),
@@ -289,7 +289,7 @@ insert into cal values ('5','월','30');
 insert into cal values ('5','화','31');
 commit ;
 
-----drop table gift purge ;
+--drop table gift purge ;
 
 create table gift
 ( gno  number ,
@@ -309,7 +309,7 @@ insert into gift values(9,'드럼세탁기',800001,900000);
 insert into gift values(10,'양쪽문냉장고',900001,1000000);
 commit ;
 
-----drop table gogak purge;
+--drop table gogak purge;
 
 create table gogak
 (gno  number(8) ,
@@ -339,7 +339,7 @@ insert into gogak values (20010019,'김지영','7803242114563',770000);
 insert into gogak values (20010020,'허우','7802232116784',730000);
 commit ;
 
-----drop table hakjum purge ;
+--drop table hakjum purge ;
 
 create table hakjum
 (grade char(5) ,
@@ -357,7 +357,7 @@ insert into hakjum values ('D',0,69);
 commit;
 
 
-----drop table exam_01 purge ;
+--drop table exam_01 purge ;
 
 create table exam_01
 (studno  number ,
@@ -386,7 +386,7 @@ insert into exam_01 values (9715,84);
 
 commit ;
 
-----drop table p_grade purge ;
+--drop table p_grade purge ;
 
 create table p_grade
 ( position  varchar2(10) ,
@@ -407,7 +407,7 @@ insert into p_grade values ('이사',41,55,14,99,75010000,100000000);
 commit ;
 
 
-----drop table reg_test purge ;
+--drop table reg_test purge ;
 
 CREATE TABLE reg_test
 ( text varchar2(15)) ;
@@ -433,8 +433,8 @@ commit;
 
 -- insert all 실습용 테이블
 
-----drop table p_01 purge;
-----drop table p_02 purge;
+--drop table p_01 purge;
+--drop table p_02 purge;
 
 CREATE TABLE p_01
 (no  number ,
@@ -448,9 +448,9 @@ CREATE TABLE p_02
 
 -- merge 실습용 테이블
 
-----drop table pt_01 purge;
-----drop table pt_02 purge;
-----drop table p_total purge;
+--drop table pt_01 purge;
+--drop table pt_02 purge;
+--drop table p_total purge;
 
 create table pt_01
 (판매번호 varchar2(8) , 제품번호 char(4) , 수량 number , 금액 number) ;
@@ -474,7 +474,7 @@ commit;
 
 -- DML 에러 로깅 기능 실습용 테이블
 
-----drop table dml_err_test purge;
+--drop table dml_err_test purge;
 
 CREATE TABLE dml_err_test
 ( no number primary key,
@@ -531,7 +531,7 @@ end;
 
 -- 제약조건 테스트용 테이블
 
-----drop table test_novalidate purge ;
+--drop table test_novalidate purge ;
 
 CREATE TABLE test_novalidate
 ( no number primary key ,
@@ -542,7 +542,7 @@ INSERT INTO test_novalidate VALUES(2,'BBB');
 INSERT INTO test_novalidate VALUES(3,'CCC');
 COMMIt ;
 
-----drop table test_validate purge ;
+--drop table test_validate purge ;
 
 CREATE TABLE test_validate
  ( no number
@@ -555,7 +555,7 @@ INSERT INTO test_validate VALUES (2,'BBB');
 INSERT INTO test_validate VALUES (3,'CCC');
 COMMIT ;
 
-----drop table test_enable purge;
+--drop table test_enable purge;
 
 CREATE TABLE test_enable
  ( no number
@@ -567,7 +567,7 @@ CREATE TABLE test_enable
 
 -- 집계함수 연습을 위한 테이블
 
-----drop table product purge ;
+--drop table product purge ;
 
 CREATE TABLE product
 ( p_code  number(3) primary key,
@@ -583,7 +583,7 @@ insert into product values (104,'맛짱구',800);
 insert into product values(105,'샤보레',1500);
 commit;
 
-----drop table panmae purge ;
+--drop table panmae purge ;
 
 create table panmae
 ( p_date varchar2(8) not null,
@@ -618,7 +618,7 @@ insert into panmae values ('20110104',103,2,1800,'1003');
 
 commit;
 
-----drop table member purge ;
+--drop table member purge ;
 create table member
 (no number(4) not null ,
  name varchar2(10) not null ,
@@ -645,7 +645,7 @@ insert into member
 
 commit;
 
-----drop table reg_test2 purge ;
+--drop table reg_test2 purge ;
 create table reg_test2
 ( no number, ip varchar2(40));
 insert into reg_test2 values (1,'10.10.0.1');
