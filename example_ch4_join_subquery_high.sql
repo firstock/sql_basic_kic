@@ -71,14 +71,26 @@ select e.ENAME 이름, d.DNAME 부서명, e.mgr ,p.POSITION 연차직급 --mgr이 기존직급
 --    4	2855
 --    5	5000
 --    3	1550
+select * from emp;
+select * from salgrade;
+
+    --등급별 평균연봉
+select s.grade, round(avg(sal),2) 평균연봉
+    from emp e, salgrade s
+    where e.sal between losal and hisal
+    group by s.grade
+    ;
+    
+
+
     
 --[ 실습문제 ]    
 --1. student 테이블에서 각 학생의 시험성적을 기반으로 
 --같은학과에서 본인보다 시험성적이 우수한 학생수를 나타내도록 하여라.
 --단, 각 학생의 정보는 학생이름, 학과이름, 시험성적과 함께 출력하여라. (아우터조인은 고려하지 않는다)
-select * from tab;
 select * from student;
 
+select 
 
 --2. professor 테이블에서 각 학과별 최소연봉을 갖는 교수의 이름, 학과이름, pay를 출력하세요.
 
