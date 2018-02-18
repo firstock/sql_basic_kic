@@ -1,3 +1,4 @@
+-- ctrl+h > (--drop, --drop) > F5 > ctrl+h > (--drop, --drop)
 --drop table professor ;
 
 create table professor
