@@ -44,22 +44,37 @@ insert into matches
 ---- error!
 
 select team_id, team_name,
-	hostWin.winPoint+draw1.drawPoint+draw2.drawPoint as num_points
+	hostWin.winPoint+draw.drawPoint as num_points
 	from teams,
 		(select host_team as winner, count(*)*3 as winPoint
 			from matches
 			where host_goals > guest_goals
 			group by host_team) hostWin,
-		(select host_team as drawer, count(*) as drawPoint
+		(select guest_team as winner, count(*)*3 as winPoint
+			from matches
+			where host_goals < guest_goals
+			group by guest_team) guestWin,
+		(select host_team, guest_team, count(*) as drawPoint
 			from matches
 			where host_goals = guest_goals
-			group by host_team
-			) draw1,
-		(select guest_team as drawer, count(*) as drawPoint
-			from matches
-			where host_goals = guest_goals
-			group by guest_team
-			) draw2
+			group by host_team, guest_team
+			) draw
 	order by num_points desc
 ;
 
+select host_team as winner, count(matches.host_team)*3 as winPoint
+	from matches
+	where host_goals > guest_goals
+	group by host_team
+
+
+
+
+----- cf
+select s1.name 학생이름, count(s2.name) 나보다키큰애들
+from student s1, student s2
+where s1.grade= s2.grade
+and s1.name != s2.name
+and s1.height < s2.height
+group by s1.name
+order by 학생이름;
