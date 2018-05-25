@@ -3,6 +3,10 @@ SELECT * FROM tab
 
 
 --문제: emp 테이블에서 급여(sal)와 커미션(comm) 합계가 10% 인상된 급여보다 많은 사원의 이름, 급여 및 커미션을 표시하도록 한다. 단, comm이 null이 아닌 경우만 나타내도록 한다
+select ename, sal, comm
+	from emp
+	where sal+comm > 1.1*sal
+;
 
 --문제: emp 테이블에서 커미션을 받지 않는 사원의 급여를 10% 인상하여 표시하되, 다음의 형식으로 출력하여라. The salary of SMITH after a 10% raise is 880
 
