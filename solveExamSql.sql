@@ -8,7 +8,11 @@ SELECT * FROM emp;
 SELECT sal 급여, comm 커미션
 	FROM emp
 	WHERE (sal+ nvl(comm,0)) > 1.1*sal;
+
 --문제: emp 테이블에서 커미션을 받지 않는 사원의 급여를 10% 인상하여 표시하되, 다음의 형식으로 출력하여라. The salary of SMITH after a 10% raise is 880
+select 'The salary of '||ename||' after a 10% raise is '||1.1*sal
+	from emp
+	where nvl(comm,0) = 0;
 
 --문제: emp 테이블에서 12월에 입사한 사람은 보너스를 줄 수 없다고 한다. 12월에 입사한 사람의 사번, 이름, 부서번호를 조회하여라.
 
