@@ -15,7 +15,9 @@ select 'The salary of '||ename||' after a 10% raise is '||1.1*sal
 	where nvl(comm,0) = 0;
 
 --문제: emp 테이블에서 12월에 입사한 사람은 보너스를 줄 수 없다고 한다. 12월에 입사한 사람의 사번, 이름, 부서번호를 조회하여라.
-
+select empno, ename, deptno
+	from emp
+	where substr(hiredate, 4, 2)= 12;
 --문제: EMP 테이블에서 이름의 첫 글자가 'K'보다 큰 사원의 사원번호, 이름, 업무를 출력하여라.
 
 --문제: student 테이블에서 성이 'ㅅ'인 학생의 학번, 이름, 학년을 출력하여라.
