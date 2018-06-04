@@ -18,8 +18,15 @@ select 'The salary of '||ename||' after a 10% raise is '||1.1*sal
 select empno, ename, deptno
 	from emp
 	where substr(hiredate, 4, 2)= 12;
---문제: EMP 테이블에서 이름의 첫 글자가 'K'보다 큰 사원의 사원번호, 이름, 업무를 출력하여라.
 
+--문제: EMP 테이블에서 이름의 첫 글자가 'K'보다 큰 사원의 사원번호, 이름, 업무를 출력하여라.
+select empno, ename, job
+	from emp
+	where substr(ename, 1) > 'K';
+
+select empno, ename, job
+	from emp
+	where upper(substr(ename, 1)) > 'K';
 --문제: student 테이블에서 성이 'ㅅ'인 학생의 학번, 이름, 학년을 출력하여라.
 
 --문제 : 학생 테이블(student)을 사용하여 모든 학생들이 '서진수 의 키는 180 cm, 몸무게는 55 kg 입니다' 와 같은 형식으로 출력 되도록 하고 , 칼럼이름은 “학생의 키와 몸무게”라는 별명으로 출력해 보세요.
